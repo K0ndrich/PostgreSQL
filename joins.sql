@@ -50,3 +50,44 @@ JOIN order_details ON orders.order_id = order_details.order_id
 JOIN products ON order_details.product_id = products.product_id
 JOIN customers ON orders.customer_id = customers.customer_id
 JOIN employees ON orders.employee_id = employees.employee_id
+
+
+----- LEFT JOIN - 2 TABLES -----------------------------------------------------------------------
+
+SELECT company_name,product_name 
+FROM suppliers
+LEFT JOIN products ON suppliers.supplier_id = products.product_id
+
+
+SELECT company_name, order_id FROM customers
+LEFT JOIN orders ON orders.customer_id = customers.customer_id
+WHERE order_id IS NULL
+
+
+SELECT  last_name , first_name, order_id
+FROM employees
+LEFT JOIN orders ON employees.employee_id = orders.employee_id
+WHERE order_id IS NULL
+
+----- RIGHT JOIN - 2 TABLES ------------------------------------------------------------------------------
+
+SELECT company_name , order_id 
+FROM orders
+RIGHT JOIN customers ON orders.customer_id = customers.customer_id
+WHERE order_id IS NULL
+
+----- FULL JOIN - 2 TABLES ------------------------------------------------------------
+
+SELECT company_name , order_id 
+FROM orders
+FULL JOIN customers ON orders.customer_id = customers.customer_id
+
+
+
+
+
+
+
+
+
+
