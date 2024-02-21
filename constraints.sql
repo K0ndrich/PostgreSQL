@@ -1,9 +1,12 @@
 CREATE DATABASE my_tab(
-    
+
     my_id INT PRIMARY KEY -- создание и писвоение первичного ключа
+    my_id INT
     PRIMARY KEY (my_id) -- присвоение внешнего ключа (колонка заранее созданая)
 
+
     my_foreign_key INT REFERENCES my_tab2 (my_id2) -- создание и писвоение внешнего ключа
+    my_foreign_key INT
     FOREIGN KEY (my_foreign_key) REFERENCES my_tab2(my_id2) -- только присвоение внешнего ключа (колонка уже заранее созданая)
     
 

@@ -3,7 +3,7 @@
 CREATE TABLE book (
     book_id INT PRIMARY KEY,
 	title_book VARCHAR(255) NOT NULL,
-	ISBN VARCHAR(30) NOT NULL
+	ISBN VARCHAR(30) NOT NULL,
     fk_publisher_id INT REFERENCES publisher(publisher_id)
 );
 
