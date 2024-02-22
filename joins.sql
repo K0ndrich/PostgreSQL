@@ -76,16 +76,43 @@ FROM orders
 RIGHT JOIN customers ON orders.customer_id = customers.customer_id
 WHERE order_id IS NULL
 
------ FULL JOIN - 2 TABLES ------------------------------------------------------------
+----- FULL JOIN - 2 TABLES ---------------------------------------------------------------------
 
 SELECT company_name , order_id 
 FROM orders
 FULL JOIN customers ON orders.customer_id = customers.customer_id
 
 
+----- SELF JOIN - 1 TABLE -> внешний ключ ссылаеться на первичный ключ в етой же таблице -------------------------------------------------------------------------------
+
+CREATE TABLE employee(
+	employee_id INT PRIMARY KEY,
+	first_name VARCHAR(255) NOT NULL,
+	last_name VARCHAR(255) NOT NULL,
+	manager_id INT,
+	FOREIGN KEY(manager_id) REFERENCES employee(employee_id)
+);
+INSERT INTO employee(
+	employee_id,
+	first_name,
+	last_name,
+	manager_id
+)
+VALUES 
+(1,'first1','last1', NULL),
+(2,'first2','last2',1),
+(3,'first3','last3',1),
+(4,'first4','last4',2),
+(5,'first5','last5',2),
+(6,'first6','last6',3),
+(7,'first7','last7',3),
+(8,'first8','last8',3);
 
 
-
+SELECT e.first_name || ' ' || e.last_name AS employee, -- вывод двох колонок как одну
+	   m.first_name || ' ' || m.last_name AS manager 
+FROM employee e  -- даем псевдоним для таблици
+LEFT JOIN employee m ON m.employee_id = e.manager_id  -- LEFT JOIN
 
 
 
