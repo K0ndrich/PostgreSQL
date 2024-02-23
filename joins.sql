@@ -52,6 +52,21 @@ JOIN customers ON orders.customer_id = customers.customer_id
 JOIN employees ON orders.employee_id = employees.employee_id
 
 
+SELECT customers.company_name , CONCAT(first_name ,' ' ,last_name) AS full_name
+FROM orders AS o
+JOIN customers USING (customer_id)
+JOIN employees USING (employee_id)
+JOIN shippers AS s ON o.ship_via = s.shipper_id 
+WHERE customers.city = 'London' AND employees.city = 'London' AND s.company_name ='Speedy Express'
+
+
+SELECT product_name, units_in_stock , contact_name , phone 
+FROM products
+JOIN categories USING (category_id)
+JOIN suppliers USING (supplier_id)
+WHERE category_name IN ('Beverages','Seafood') AND discontinued=0 AND units_in_stock < 20
+ORDER BY units_in_stock ASC
+
 ----- LEFT JOIN - 2 TABLES -----------------------------------------------------------------------
 
 SELECT company_name,product_name 
@@ -67,6 +82,12 @@ WHERE order_id IS NULL
 SELECT  last_name , first_name, order_id
 FROM employees
 LEFT JOIN orders ON employees.employee_id = orders.employee_id
+WHERE order_id IS NULL
+
+
+SELECT contact_name , company_name , order_id 
+FROM customers
+LEFT JOIN orders USING(customer_id)
 WHERE order_id IS NULL
 
 ----- RIGHT JOIN - 2 TABLES ------------------------------------------------------------------------------
